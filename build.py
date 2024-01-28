@@ -10,13 +10,13 @@ def cmd(command):
     system(command)
 
 
-files = ["src/SL.cpp", "src/Renderer.cpp", "src/Audio.cpp"]
+files = ["src/SL.cpp", "src/Renderer.cpp", "src/Audio.cpp", "src/gl.c"]
 
 
 
 windows_libs = "-Wno-tautological-constant-out-of-range-compare -ld3dcompiler -ld3d11 -ldxgi -lSDL2 -lgdi32 -limm32 -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lwinmm -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid -lSDL2main"
 linux_libs = "-lSDL2 -lm -lGL -lX11"
-apple_libs = "-framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -lSDL2"
+apple_libs = "-liconv -framework ForceFeedback -framework CoreHaptics -framework AudioToolbox -framework GameController -framework OpenGL -framework Metal -framework Carbon -framework Cocoa -framework IOKit -framework CoreAudio -framework CoreVideo -lSDL2 -I/opt/local/include"
 
 windows_lib_directory = "lib/win64"
 linux_lib_directory = "lib/linux"
@@ -42,7 +42,10 @@ elif platform.system() == "Darwin":
     CPP = "clang++"
 
 
-cmd(f"{CPP} {files} -o SL -Iinclude -L{windows_lib_directory} {windows_libs}")
+# set version to c++ 11
+libs += " -std=c++11"
+
+cmd(f"{CPP} {files} -o SL -Iinclude -L{lib_directory} {libs}")
 
 makedirs("dist", exist_ok=True)
 
