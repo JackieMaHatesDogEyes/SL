@@ -10,7 +10,7 @@ class DX11Renderer {
     public:
         DX11Renderer(void* nativeWindowHandle);
 
-        struct ShaderProgram CreateShaderProgram(const char* file);
+        struct ShaderProgram CreateShaderProgram(const char* file, const char* _unused);
 
         void Close();
     private:

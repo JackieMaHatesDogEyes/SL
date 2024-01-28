@@ -10,7 +10,7 @@ def cmd(command):
     system(command)
 
 
-RELEASE = True
+RELEASE = False
 
 files = ["src/SL.cpp", "src/Renderer.cpp", "src/Audio.cpp", "src/gl.c"]
 
@@ -47,7 +47,8 @@ if RELEASE:
         optimization_level = "-Os"
     else:
         optimization_level = "-O3"
-
+else:
+    optimization_level = "-O0"
 
 # set version to c++ 11
 libs += " -std=c++11"

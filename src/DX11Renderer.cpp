@@ -88,7 +88,7 @@ void DX11Renderer::Close() {
     device->Release();
 }
 
-struct ShaderProgram DX11Renderer::CreateShaderProgram(const char* file) {
+struct ShaderProgram DX11Renderer::CreateShaderProgram(const char* file, const char* _unused) {
     UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
 
     #if defined( DEBUG ) || defined( _DEBUG )
