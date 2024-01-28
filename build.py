@@ -10,6 +10,8 @@ def cmd(command):
     system(command)
 
 
+RELEASE = True
+
 files = ["src/SL.cpp", "src/Renderer.cpp", "src/Audio.cpp", "src/gl.c"]
 
 
@@ -26,6 +28,7 @@ apple_lib_directory = "lib/macos"
 
 files = " ".join(files)
 
+CPP = "clang++"
 
 
 if platform.system() == "Linux":
@@ -35,17 +38,21 @@ if platform.system() == "Linux":
 elif platform.system() == "Windows":
     libs = windows_libs
     lib_directory = windows_lib_directory
-    CPP = "clang++"
 elif platform.system() == "Darwin":
     libs = apple_libs
     lib_directory = apple_lib_directory
-    CPP = "clang++"
+
+if RELEASE:
+    if "clang" in CPP:
+        optimization_level = "-Os"
+    else:
+        optimization_level = "-O3"
 
 
 # set version to c++ 11
 libs += " -std=c++11"
 
-cmd(f"{CPP} {files} -o SL -Iinclude -L{lib_directory} {libs}")
+cmd(f"{CPP} {files} -o SL -Iinclude -L{lib_directory} {libs} {optimization_level}")
 
 makedirs("dist", exist_ok=True)
 
