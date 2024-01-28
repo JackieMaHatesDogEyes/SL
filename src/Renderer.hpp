@@ -16,5 +16,6 @@ void* getNativeWindowHandle(SDL_Window* window);
     #include "DX11Renderer.hpp"
     #define Renderer DX11Renderer
 #else
-    // TODO: Include OpenGL Renderer
+    #include "GLRenderer.hpp"
+    #define Renderer GLRenderer
 #endif

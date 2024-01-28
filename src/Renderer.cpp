@@ -4,7 +4,7 @@
 #ifdef _WIN32
     #include "DX11Renderer.cpp"
 #else
-    // TODO: Include OpenGL Renderer
+    #include "GLRenderer.cpp"
 #endif
 
 
